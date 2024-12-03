@@ -35,10 +35,15 @@ describe("When slider is created", () => {
         <Slider />
       </DataProvider>
     );
-    await screen.findByText("World economic forum");
-    await screen.findByText("janvier");
-    await screen.findByText(
-      "Oeuvre à la coopération entre le secteur public et le privé."
-    );
+
+    // Attendre que les textes apparaissent
+    const worldEconomicForumText = await screen.findByText("World economic forum");
+    const januaryText = await screen.findByText("janvier");
+    const cooperationText = await screen.findByText("Oeuvre à la coopération entre le secteur public et le privé.");
+
+    // Vérifier que les textes sont bien affichés
+    expect(worldEconomicForumText).toBeInTheDocument()
+    expect(januaryText).toBeInTheDocument()
+    expect(cooperationText).toBeInTheDocument()
   });
 });
