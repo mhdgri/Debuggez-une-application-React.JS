@@ -15,6 +15,7 @@ const Slider = () => {
     return () => clearInterval(interval);
   }, [data]);
 
+  // Changement de a - b pour afficher du plus ancien au plus recent
   const byDateAsc = [...(data?.focus || [])].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   
 
