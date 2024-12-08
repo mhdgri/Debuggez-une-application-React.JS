@@ -13,7 +13,10 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const { data } = useData();
+  const latestEvent = data?.events.slice(-1)[0];
+  
+
   return <>
     <header>
       <Menu />
@@ -23,8 +26,8 @@ const Page = () => {
         <Slider />
       </section>
       <section className="ServicesContainer">
-        <h2 className="Title">Nos services</h2>
-        <p>Nous organisons des événements sur mesure partout dans le monde</p>
+        <h2 className="Title" id="nos-services">Nos services</h2>
+        <p>Nous organisons des événements sur mesure partout dans le monde</p>.
         <div className="ListContainer">
           <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
             <h3>Soirée d’entreprise</h3>
@@ -51,40 +54,46 @@ const Page = () => {
           </ServiceCard>
         </div>
       </section>
-      <section className="EventsContainer">
-        <h2 className="Title">Nos réalisations</h2>
-        <EventList />
+      <section data-testid="events" className="EventsContainer">
+        <h2 className="Title" id="nos-realisations">Nos réalisations</h2>
+        <EventList  />
       </section>
       <section className="PeoplesContainer">
-        <h2 className="Title">Notre équipe</h2>
+        <h2 className="Title" id="notre-equipe">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
           <PeopleCard
+            data-testid="card-image-testid"
             imageSrc="/images/stephanie-liverani-Zz5LQe-VSMY-unsplash.png"
             name="Samira"
             position="CEO"
           />
           <PeopleCard
+            data-testid="card-image-testid"
             imageSrc="/images/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.png"
             name="Jean-baptiste"
             position="Directeur marketing"
           />
           <PeopleCard
+            data-testid="card-image-testid"
             imageSrc="/images/christina-wocintechchat-com-SJvDxw0azqw-unsplash.png"
             name="Alice"
             position="CXO"
           />
           <PeopleCard
+            data-testid="card-image-testid"
             imageSrc="/images/jonas-kakaroto-KIPqvvTOC1s-unsplash.png"
             name="Luís"
             position="Animateur"
           />
           <PeopleCard
+            data-testid="card-image-testid"
             imageSrc="/images/amy-hirschi-b3AYk8HKCl0-unsplash1.png"
             name="Christine"
             position="VP animation"
           />
           <PeopleCard
+            data-testid="card-image-testid"
             imageSrc="/images/christina-wocintechchat-com-0Zx1bDv5BNY-unsplash.png"
             name="Isabelle"
             position="VP communication"
@@ -92,7 +101,7 @@ const Page = () => {
         </div>
       </section>
       <div className="FormContainer" id="contact">
-        <h2 className="Title">Contact</h2>
+        <h2 className="Title" id="contact">Contact</h2>
         <Modal
           Content={
             <div className="ModalMessage--success">
@@ -113,16 +122,19 @@ const Page = () => {
         </Modal>
       </div>
     </main>
-    <footer className="row">
+    <footer data-testid="footer" className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        <EventCard
-          imageSrc={last?.cover}
-          title={last?.title}
-          date={new Date(last?.date)}
-          small
-          label="boom"
-        />
+        {latestEvent && (
+            <EventCard
+              data-testid="card-testid"
+              imageSrc={latestEvent.cover}
+              title={latestEvent.title}
+              date={new Date(latestEvent.date)}
+              small
+              label="boom"
+            />
+          )}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
