@@ -12,10 +12,10 @@ const Form = ({ onSuccess, onError }) => {
     async (evt) => {
       evt.preventDefault();
       setSending(true);
-      // We try to call mockContactApi
-      try {
+            try {
         await mockContactApi();
         setSending(false);
+        onSuccess();
       } catch (err) {
         setSending(false);
         onError(err);
@@ -42,7 +42,7 @@ const Form = ({ onSuccess, onError }) => {
           </Button>
         </div>
         <div className="col">
-          <Field
+        <Field
             placeholder="message"
             label="Message"
             type={FIELD_TYPES.TEXTAREA}
